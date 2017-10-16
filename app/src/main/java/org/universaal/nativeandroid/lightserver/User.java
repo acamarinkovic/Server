@@ -1,5 +1,7 @@
 package org.universaal.nativeandroid.lightserver;
 
+import com.pixplicity.easyprefs.library.Prefs;
+
 /**
  * Created by Aleksandar Marinković on 16-Oct-17.
  */
@@ -9,7 +11,9 @@ public class User {
     String name;
     String type;
     String data;
-
+    String userId;
+    String phone;
+    String address;
     public String getUserId() {
         return userId;
     }
@@ -18,10 +22,13 @@ public class User {
         this.userId = userId;
     }
 
-    String userId;
-
     public User(String name, String type, String data) {
         this.name = name;
+        this.type = type;
+        this.data = data;
+    }
+
+    public User(String type, String data) {
         this.type = type;
         this.data = data;
     }
@@ -31,8 +38,9 @@ public class User {
         this.name = name;
         this.type = type;
         this.data = data;
+        phone= Prefs.getString(Constants.PHONE,"");
+        address= Prefs.getString(Constants.ADDRESS,"");
     }
-
 
 
     public String getAvatar() {
