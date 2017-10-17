@@ -14,12 +14,16 @@ public class User {
     String userId;
     String phone;
     String address;
+
     public String getUserId() {
         return userId;
     }
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public User() {
     }
 
     public User(String name, String type, String data) {
@@ -38,8 +42,8 @@ public class User {
         this.name = name;
         this.type = type;
         this.data = data;
-        phone= Prefs.getString(Constants.PHONE,"");
-        address= Prefs.getString(Constants.ADDRESS,"");
+        phone = Prefs.getString(Constants.PHONE, "");
+        address = Prefs.getString(Constants.ADDRESS, "");
     }
 
 

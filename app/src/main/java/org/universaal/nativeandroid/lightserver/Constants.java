@@ -11,5 +11,6 @@ public class Constants {
     public static final String FALL_DETECTED = "Fall Detected";
     public static final String TEMPERATURE = "Temperature";
     public static final String MESSAGE = "Message";
+    public static final String USER = "USER";
 
 }

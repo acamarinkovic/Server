@@ -33,6 +33,15 @@ public class AllUsers {
         return users;
     }
 
+    public User getUserrByEvent(User user) {
+        for (User usersss : this.users) {
+            if (user.getUserId().equals(usersss.getUserId())) {
+                return usersss;
+            }
+        }
+        return new User();
+    }
+
     public void setUsers(User newUser) {
 
         for (User user : this.users) {
@@ -51,6 +60,19 @@ public class AllUsers {
             allUsers = new AllUsers();
         }
         return allUsers;
+    }
+
+    public static AllUsers getInstance(AllUsers auser) {
+            allUsers = auser;
+        return allUsers;
+    }
+
+
+
+
+    private AllUsers() {
+        users = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
 
