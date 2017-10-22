@@ -37,9 +37,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
-        Gson gson = new Gson();
-        AllUsers user = gson.fromJson(Prefs.getString(Constants.USER,""), AllUsers.class);
-        AllUsers.getInstance(user);
+      try {
+          Gson gson = new Gson();
+          AllUsers user = gson.fromJson(Prefs.getString(Constants.USER, ""), AllUsers.class);
+          AllUsers.getInstance(user);
+      }catch (Exception e)
+      {
+
+      }
     }
 
     @Override
