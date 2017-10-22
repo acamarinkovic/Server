@@ -14,6 +14,8 @@ import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.nio.file.attribute.UserDefinedFileAttributeView;
+
 public class MyReceiver extends BroadcastReceiver {
     public static int NOTIF_ID = 8225;
 
@@ -40,6 +42,7 @@ public class MyReceiver extends BroadcastReceiver {
 //                    .getSystemService(Context.NOTIFICATION_SERVICE);
 //            manager.notify(NOTIF_ID, notif);
         } else {
+            AllUsers.getInstance().addEvent(user);
             EventBus.getDefault().post(new Event(user));
 //            AllUsers.getInstance().addEvent(user);
 //            User byEvent = AllUsers.getInstance().getUserrByEvent(user);

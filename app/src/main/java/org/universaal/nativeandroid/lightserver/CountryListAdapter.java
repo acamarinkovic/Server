@@ -54,15 +54,8 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         View view;
-        view = inflater.inflate(R.layout.row_item_list, parent, false);
+        view = inflater.inflate(R.layout.row_item_history, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EventBus.getDefault().post(new EventClick(users.get(viewHolder.getAdapterPosition())));
-            }
-        });
-
 
         return viewHolder;
     }
@@ -71,6 +64,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
     public void onBindViewHolder(final ViewHolder holder, int position) {
         User user = users.get(position);
         holder.type.setText(user.getType());
+        if(user.getData()!=null)
         holder.itemText.setText(user.getData());
     }
 

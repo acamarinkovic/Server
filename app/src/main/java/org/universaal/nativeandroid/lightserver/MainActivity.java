@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         rec.setLayoutManager( new LinearLayoutManager(this));
         fragmentHolder.setLayoutManager( new LinearLayoutManager(this));
-        rec.setAdapter(new CountryListAdapter(this,AllUsers.getInstance().getUsers()));
+        rec.setAdapter(new UserHistoryListAdapter(this,AllUsers.getInstance().getUsers()));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case Constants.FIRST_NAME: {
-                rec.setAdapter(new CountryListAdapter(this,AllUsers.getInstance().getUsers()));
+                rec.setAdapter(new UserHistoryListAdapter(this,AllUsers.getInstance().getUsers()));
             }
             break;
             case Constants.PRESSURE: {
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe
     public void onEventClick(EventClick event) {
         fragmentHolder.setVisibility(View.VISIBLE);
-        fragmentHolder.setAdapter(new UserHistoryListAdapter(this,AllUsers.getInstance().getEvents(event.getUser().getUserId())));
+        fragmentHolder.setAdapter(new CountryListAdapter(this,AllUsers.getInstance().getEvents(event.getUser().getUserId())));
     }
 
     @Override
