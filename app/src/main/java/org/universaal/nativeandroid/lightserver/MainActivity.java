@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case Constants.FIRST_NAME: {
-
+                rec.setAdapter(new CountryListAdapter(this,AllUsers.getInstance().getUsers()));
             }
             break;
             case Constants.PRESSURE: {
