@@ -26,7 +26,33 @@
             android:exported="true">
 
             <intent-filter>
-                <action android:name="org.universaal.nativeandroid.light.CALL_ON" />
+                <action android:name="es.upv.TEMPERATUREP_RECEIVE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="es.upv.FALLDETECTEDP_RECEIVE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="es.upv.BLOODP_RECEIVE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="es.upv.HEARTHRATEP_RECEIVE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="es.upv.SENDMESSAGEP_RECEIVE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="es.upv.SENDUPDATEP_RECEIVE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>

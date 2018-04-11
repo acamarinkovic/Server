@@ -8,49 +8,24 @@ import java.util.List;
  */
 
 public class AllUsers {
-    List<User> events;
     List<User> users;
 
-    public List<User> getEvents(String userid) {
-        List<User> userList = new ArrayList<>();
-        if (events != null)
-            for (User user : events) {
-                if (user.getUserId().equals(userid)) {
-                    userList.add(user);
-                }
-            }
-        return userList;
-    }
-
-    public void addEvent(User event) {
-        if (events == null) {
-            events = new ArrayList<>();
-        }
-        events.add(event);
-    }
 
     public List<User> getUsers() {
         return users;
     }
 
-    public User getUserrByEvent(User user) {
-        for (User usersss : this.users) {
-            if (user.getUserId().equals(usersss.getUserId())) {
-                return usersss;
+    public User getUserByName(String name) {
+        for (User user : this.users) {
+            if (user.getName().equals(name)) {
+                return user;
             }
         }
-        return new User();
+        return null;
     }
 
-    public void setUsers(User newUser) {
-
-        for (User user : this.users) {
-            if (user.getUserId().equals(newUser.getUserId())) {
-                this.users.remove(user);
-            }
-        }
+    public void addUser(User newUser) {
         this.users.add(newUser);
-
     }
 
     private static AllUsers allUsers;
@@ -67,13 +42,7 @@ public class AllUsers {
         return allUsers;
     }
 
-
-
-
     private AllUsers() {
-        users = new ArrayList<>();
-        events = new ArrayList<>();
+        users = new ArrayList<>();;
     }
-
-
 }

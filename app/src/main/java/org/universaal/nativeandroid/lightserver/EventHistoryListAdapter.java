@@ -1,36 +1,32 @@
 package org.universaal.nativeandroid.lightserver;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.greenrobot.eventbus.EventBus;
+import org.universaal.nativeandroid.lightserver.organizer.UserEvent;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.ViewHolder> {
+public class EventHistoryListAdapter extends RecyclerView.Adapter<EventHistoryListAdapter.ViewHolder> {
 
     private static LayoutInflater inflater = null;
     private Context context;
-    List<User> users;
+    List<UserEvent> events;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.type)
-        TextView type;
         @BindView(R.id.item_text)
         TextView itemText;
+        @BindView(R.id.textViewDate)
+        TextView dateText;
         @BindView(R.id.root)
         ConstraintLayout root;
 
@@ -41,11 +37,11 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
     }
 
 
-    public CountryListAdapter(Context context, List<User> users) {
+    public EventHistoryListAdapter(Context context, List<UserEvent> events) {
         this.context = context;
         if (context != null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            this.users = users;
+            this.events = events;
         }
 
     }
@@ -62,17 +58,18 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        User user = users.get(position);
-        holder.type.setText(user.getType());
-        if(user.getData()!=null)
-        holder.itemText.setText(user.getData());
+        String event = events.get(position).getEvent();
+        holder.itemText.setText(event);
+
+        String time=events.get(position).getTime();
+        holder.dateText.setText(time);
     }
 
 
     @Override
     public int getItemCount() {
-        if (users != null)
-            return users.size();
+        if (events != null)
+            return events.size();
         return 0;
     }
 

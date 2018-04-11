@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.pixplicity.easyprefs.library.Prefs;
@@ -30,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         rec.setLayoutManager( new LinearLayoutManager(this));
         fragmentHolder.setLayoutManager( new LinearLayoutManager(this));
+        fragmentHolder.setVisibility(View.INVISIBLE);
         rec.setAdapter(new UserHistoryListAdapter(this,AllUsers.getInstance().getUsers()));
     }
 
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
           Gson gson = new Gson();
           AllUsers user = gson.fromJson(Prefs.getString(Constants.USER, ""), AllUsers.class);
           AllUsers.getInstance(user);
+          rec.setAdapter(new UserHistoryListAdapter(this,AllUsers.getInstance().getUsers()));
       }catch (Exception e)
       {
 
@@ -63,37 +64,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onEvent(Event event) {
-        User user = event.getUser();
-        switch (user.getType()) {
-            case Constants.FALL_DETECTED: {
-
-            }
-            break;
-            case Constants.MESSAGE: {
-
-            }
-            break;
-            case Constants.FIRST_NAME: {
-                rec.setAdapter(new UserHistoryListAdapter(this,AllUsers.getInstance().getUsers()));
-            }
-            break;
-            case Constants.PRESSURE: {
-
-            }
-            break;
-            case Constants.TEMPERATURE: {
-
-            }
-            break;
+        rec.getAdapter().notifyDataSetChanged();
+        if(fragmentHolder.getAdapter()!=null && fragmentHolder.getVisibility()==View.VISIBLE)
+        {
+            fragmentHolder.getAdapter().notifyDataSetChanged();
         }
-
     }
 
 
     @Subscribe
     public void onEventClick(EventClick event) {
         fragmentHolder.setVisibility(View.VISIBLE);
-        fragmentHolder.setAdapter(new CountryListAdapter(this,AllUsers.getInstance().getEvents(event.getUser().getUserId())));
+        fragmentHolder.setAdapter(new EventHistoryListAdapter(this,AllUsers.getInstance().getUserByName(event.getUser().getName()).events));
     }
 
     @Override

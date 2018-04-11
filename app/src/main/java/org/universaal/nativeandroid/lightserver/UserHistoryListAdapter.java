@@ -20,8 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class UserHistoryListAdapter extends RecyclerView.Adapter<UserHistoryListAdapter.ViewHolder> {
-
-    private static LayoutInflater inflater = null;
     private Context context;
     List<User> users;
 
@@ -31,6 +29,8 @@ public class UserHistoryListAdapter extends RecyclerView.Adapter<UserHistoryList
         ImageView checkMarkImage;
         @BindView(R.id.item_text)
         TextView itemText;
+        @BindView(R.id.textViewAddress)
+        TextView addressText;
         @BindView(R.id.root)
         ConstraintLayout root;
 
@@ -43,18 +43,14 @@ public class UserHistoryListAdapter extends RecyclerView.Adapter<UserHistoryList
 
     public UserHistoryListAdapter(Context context, List<User> users) {
         this.context = context;
-        if (context != null) {
-            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            this.users = users;
-        }
-
+        this.users = users;
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         View view;
-        view = inflater.inflate(R.layout.row_item_list, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_list, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,13 +66,15 @@ public class UserHistoryListAdapter extends RecyclerView.Adapter<UserHistoryList
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         User user = users.get(position);
-        try {
+        /*try {
             byte[] decodedString = Base64.decode(user.getAvatar(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             holder.checkMarkImage.setImageBitmap(decodedByte);
         } catch (Exception e) {
-        }
+        }*/
         holder.itemText.setText(user.getName());
+        holder.checkMarkImage.setImageBitmap(user.getImage());
+        holder.addressText.setText(user.getAddress());
     }
 
 

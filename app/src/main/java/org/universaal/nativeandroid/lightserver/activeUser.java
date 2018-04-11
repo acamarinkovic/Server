@@ -12,8 +12,6 @@ public class activeUser {
     User users;
 
     public User getUsers() {
-        if (users == null)
-            return new User();
         return users;
     }
 

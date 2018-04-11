@@ -1,58 +1,43 @@
 package org.universaal.nativeandroid.lightserver;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import com.pixplicity.easyprefs.library.Prefs;
+
+import org.universaal.nativeandroid.lightserver.organizer.UserEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Aleksandar Marinković on 16-Oct-17.
  */
 
 public class User {
-    String avatar;
     String name;
-    String type;
-    String data;
-    String userId;
-    String phone;
+    String image;
     String address;
+    List<UserEvent> events;
 
-    public String getUserId() {
-        return userId;
+
+    public User(String name, String picture, String address) {
+        if(picture!=null) {
+            image=picture;
+            this.address=address;
+            this.name = name;
+            events = new ArrayList<>();
+        }
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public Bitmap getImage() {
+        byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-    public User() {
-    }
-
-    public User(String name, String type, String data) {
-        this.name = name;
-        this.type = type;
-        this.data = data;
-    }
-
-    public User(String type, String data) {
-        this.type = type;
-        this.data = data;
-    }
-
-    public User(String avatar, String name, String type, String data) {
-        this.avatar = avatar;
-        this.name = name;
-        this.type = type;
-        this.data = data;
-        phone = Prefs.getString(Constants.PHONE, "");
-        address = Prefs.getString(Constants.ADDRESS, "");
-    }
-
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -63,19 +48,19 @@ public class User {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getAddress() {
+        return address;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getData() {
-        return data;
+    public List<UserEvent> getEvents() {
+        return events;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void addEvent(UserEvent event) {
+        events.add(event);
     }
 }
